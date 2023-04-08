@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<warehouse width = "196.018214212737" depth = "98.0091071063684" storagelocationwidth = "4" storagelocationdepth = "4">
+<region angle = "0">
+<storagelocation x = "82.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "78.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "74.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "70.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "66.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "62.0091071063684" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "82.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "82.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "78.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "78.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "74.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "74.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "70.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "70.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "66.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "66.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "62.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "62.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "58.0091071063684" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "58.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "54.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "50.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "46.0091071063684" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "82.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "82.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "78.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "78.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "74.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "74.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "70.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "70.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "66.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "66.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "62.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "62.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "58.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "58.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "54.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "54.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "50.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "50.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "46.0091071063684" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "46.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "42.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "38.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "34.0091071063684" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "82.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "82.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "78.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "78.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "74.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "74.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "70.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "70.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "66.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "66.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "62.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "62.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "58.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "58.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "54.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "54.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "50.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "50.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "46.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "46.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "42.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "42.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "38.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "38.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "34.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "34.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "30.0091071063684" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "30.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "26.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "22.0091071063684" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "18.0091071063684" y = "-8.00910710636836" flip = "False" />"
+</region>
+<region angle = "0">
+<storagelocation x = "-62.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-66.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-70.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-74.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-78.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-82.0000088328743" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-46.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-50.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-54.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-58.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-58.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-62.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-62.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-66.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-66.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-70.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-70.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-74.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-74.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-78.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-78.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-82.0000088328743" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-82.0000088328743" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-34.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-38.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-42.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-46.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-46.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-50.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-50.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-54.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-54.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-58.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-58.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-62.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-62.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-66.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-66.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-70.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-70.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-74.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-74.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-78.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-78.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-82.0000088328743" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-82.0000088328743" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "-18.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-22.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-26.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-30.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-30.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-34.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-34.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-38.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-38.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-42.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-42.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-46.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-46.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-50.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-50.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-54.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-54.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-58.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-58.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-62.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-62.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-66.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-66.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-70.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-70.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-74.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-74.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-78.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-78.0000088328743" y = "-8.00910710636836" flip = "False" />"
+<storagelocation x = "-82.0000088328743" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-82.0000088328743" y = "-8.00910710636836" flip = "False" />"
+</region>
+<region angle = "90">
+<storagelocation x = "-43.388476261369" y = "-76.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-76.0091071063684" flip = "True" />"
+<storagelocation x = "-39.388476261369" y = "-76.0091071063684" flip = "False" />"
+<storagelocation x = "-23.388476261369" y = "-72.0091071063684" flip = "True" />"
+<storagelocation x = "-39.388476261369" y = "-72.0091071063684" flip = "False" />"
+<storagelocation x = "-23.388476261369" y = "-68.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-60.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-56.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-52.0091071063684" flip = "True" />"
+<storagelocation x = "-23.388476261369" y = "-48.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-76.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-76.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-72.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-72.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-68.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-64.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-60.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-60.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-56.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-56.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-52.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-52.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-48.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "-19.388476261369" y = "-44.0091071063684" flip = "False" />"
+<storagelocation x = "-3.38847626136896" y = "-40.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-36.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-32.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-28.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-24.0091071063684" flip = "True" />"
+<storagelocation x = "-3.38847626136896" y = "-20.0091071063684" flip = "True" />"
+<storagelocation x = "16.611523738631" y = "-76.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-76.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-72.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-72.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-68.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-64.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-64.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-60.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-60.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-56.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-56.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-52.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-52.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-48.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-44.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-44.0091071063684" flip = "False" />"
+<storagelocation x = "16.611523738631" y = "-40.0091071063684" flip = "True" />"
+<storagelocation x = "0.611523738631035" y = "-40.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-36.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-32.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-28.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-24.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-20.0091071063684" flip = "False" />"
+<storagelocation x = "0.611523738631035" y = "-16.0091071063684" flip = "False" />"
+<storagelocation x = "36.611523738631" y = "-76.0091071063684" flip = "True" />"
+<storagelocation x = "20.611523738631" y = "-76.0091071063684" flip = "False" />"
+<storagelocation x = "36.611523738631" y = "-72.0091071063684" flip = "True" />"
+<storagelocation x = "20.611523738631" y = "-72.0091071063684" flip = "False" />"
+<storagelocation x = "36.611523738631" y = "-68.0091071063684" flip = "True" />"
+<storagelocation x = "20.611523738631" y = "-68.0091071063684" flip = "False" />"
+<storagelocation x = "20.611523738631" y = "-64.0091071063684" flip = "False" />"
+<storagelocation x = "20.611523738631" y = "-60.0091071063684" flip = "False" />"
+<storagelocation x = "20.611523738631" y = "-56.0091071063684" flip = "False" />"
+<storagelocation x = "20.611523738631" y = "-52.0091071063684" flip = "False" />"
+<storagelocation x = "20.611523738631" y = "-48.0091071063684" flip = "False" />"
+<storagelocation x = "40.611523738631" y = "-76.0091071063684" flip = "False" />"
+</region>
+<picklists>
+<picklist id= "0">
+<picklocation x = "74.0091071063684" y = "-16.0091071063684" />"
+</picklist>
+<picklist id= "1">
+<picklocation x = "-58.0000088328743" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "2">
+<picklocation x = "66.0091071063684" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "3">
+<picklocation x = "-66.0000088328743" y = "-16.0091071063684" />"
+</picklist>
+<picklist id= "4">
+<picklocation x = "8.61152373863104" y = "-48.0091071063684" />"
+</picklist>
+<picklist id= "5">
+<picklocation x = "-66.0000088328743" y = "-16.0091071063684" />"
+</picklist>
+<picklist id= "6">
+<picklocation x = "-74.0000088328743" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "7">
+<picklocation x = "-50.0000088328743" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "8">
+<picklocation x = "-70.0000088328743" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "9">
+<picklocation x = "-11.388476261369" y = "-52.0091071063684" />"
+</picklist>
+<picklist id= "10">
+<picklocation x = "50.0091071063684" y = "-16.0091071063684" />"
+</picklist>
+<picklist id= "11">
+<picklocation x = "8.61152373863104" y = "-64.0091071063684" />"
+</picklist>
+<picklist id= "12">
+<picklocation x = "-70.0000088328743" y = "-16.0091071063684" />"
+</picklist>
+<picklist id= "13">
+<picklocation x = "8.61152373863104" y = "-64.0091071063684" />"
+</picklist>
+<picklist id= "14">
+<picklocation x = "-70.0000088328743" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "15">
+<picklocation x = "-11.388476261369" y = "-24.0091071063684" />"
+</picklist>
+<picklist id= "16">
+<picklocation x = "-31.388476261369" y = "-76.0091071063684" />"
+</picklist>
+<picklist id= "17">
+<picklocation x = "-82.0000088328743" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "18">
+<picklocation x = "62.0091071063684" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "19">
+<picklocation x = "42.0091071063684" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "20">
+<picklocation x = "-58.0000088328743" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "21">
+<picklocation x = "70.0091071063684" y = "-36.0091071063684" />"
+</picklist>
+<picklist id= "22">
+<picklocation x = "70.0091071063684" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "23">
+<picklocation x = "-11.388476261369" y = "-24.0091071063684" />"
+</picklist>
+<picklist id= "24">
+<picklocation x = "8.61152373863104" y = "-76.0091071063684" />"
+</picklist>
+<picklist id= "25">
+<picklocation x = "-31.388476261369" y = "-60.0091071063684" />"
+</picklist>
+<picklist id= "26">
+<picklocation x = "-66.0000088328743" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "27">
+<picklocation x = "50.0091071063684" y = "-56.0091071063684" />"
+</picklist>
+<picklist id= "28">
+<picklocation x = "-11.388476261369" y = "-68.0091071063684" />"
+</picklist>
+<picklist id= "29">
+<picklocation x = "-30.0000088328743" y = "-16.0091071063684" />"
+</picklist>
+</picklists>
