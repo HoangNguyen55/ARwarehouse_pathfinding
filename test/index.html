@@ -9,12 +9,5 @@
 <body>
     
 </body>
-<script>
-    WebAssembly.instantiateStreaming(fetch("test.wasm"))
-    .then((results) => {
-        const wasm = results.instance.exports
-        let a = [1, 2, 3 ,4]
-        console.log(wasm.arrays(a));
-    })
-</script>
+<script type="module" src="main.js"></script>
 </html>
