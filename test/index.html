@@ -13,7 +13,8 @@
     WebAssembly.instantiateStreaming(fetch("test.wasm"))
     .then((results) => {
         const wasm = results.instance.exports
-        console.log(wasm.add(1, 2));
+        let a = [1, 2, 3 ,4]
+        console.log(wasm.arrays(a));
     })
 </script>
 </html>
