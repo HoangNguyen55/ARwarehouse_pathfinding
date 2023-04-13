@@ -2,12 +2,6 @@ use array2d::Array2D;
 use serde_wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
-extern "C" {
-     #[wasm_bindgen(js_namespace = console)]
-     fn log(s: &str);
-}
-
 static mut WAREHOUSE_WIDTH: f32 = 0f32;
 static mut WAREHOUSE_DEPTH: f32 = 0f32;
 static mut RACK_WIDTH: f32 = 0f32;
@@ -33,28 +27,34 @@ fn get_warehouse() -> &'static mut Array2D<bool> {
  * coords: an array of x and y values of the ard file \[(x1,y1), (x2, y2)]
 */
 #[wasm_bindgen]
-pub fn set_internal_coordinates(warehouse_width: f32, warehouse_depth: f32, rack_width: f32, rack_depth: f32, coords: JsValue){
-    unsafe{
+pub fn set_internal_coordinates(
+    warehouse_width: f32,
+    warehouse_depth: f32,
+    rack_width: f32,
+    rack_depth: f32,
+    coords: JsValue,
+) {
+    unsafe {
         WAREHOUSE_WIDTH = warehouse_width;
         WAREHOUSE_DEPTH = warehouse_depth;
         RACK_DEPTH = rack_depth;
         RACK_WIDTH = rack_width;
-    }   
+    }
 
     let mut coordinates: Vec<Vec<f32>> = serde_wasm_bindgen::from_value(coords).unwrap();
-    
+
     // normalize all the values so that a single rack take up 1 cell in the internal representation of a 2d map
     let max_row = (warehouse_width / rack_width).floor();
     let max_col = (warehouse_depth / rack_depth).floor();
     for coordinate in coordinates.iter_mut() {
         // shifts all the coordinate so that top left is 0, 0
-        coordinate[0] = (coordinate[0] / rack_width).floor() + (max_row/2f32).floor();
-        coordinate[1] = (coordinate[1] / rack_depth).floor() + (max_col/2f32).floor();
+        coordinate[0] = (coordinate[0] / rack_width).ceil() + (max_row / 2f32).round();
+        coordinate[1] = (coordinate[1] / rack_depth).ceil() + max_col;
     }
 
     let mut warehouse = Array2D::filled_with(false, max_row as usize, max_col as usize);
     for coordinate in coordinates.iter() {
-        warehouse[(coordinate[0] as usize, coordinate[1] as usize)] = true; 
+        warehouse[(coordinate[0] as usize, coordinate[1] as usize)] = true;
     }
 
     unsafe {
@@ -63,29 +63,23 @@ pub fn set_internal_coordinates(warehouse_width: f32, warehouse_depth: f32, rack
 }
 
 #[wasm_bindgen]
-pub fn testing() {
-    for i in 0..get_warehouse().row_len() {
-        
+pub fn testing() -> JsValue {
+    let warehouse: &Array2D<bool> = get_warehouse();
+    let mut out: Vec<Vec<i32>> = vec![];
+    for i in warehouse.columns_iter() {
+        let mut temp: Vec<i32> = vec![];
+        for ele in i {
+            temp.push(if ele.to_owned() {1} else {0});
+        }
+        out.push(temp);
     }
+
+    serde_wasm_bindgen::to_value(&out).unwrap()
 }
 
-
 #[wasm_bindgen]
-pub fn calculate_path(x: f32, y: f32) -> JsValue {
+pub fn calculate_path(from: Vec<f32>, to: Vec<f32>) -> JsValue {
     let mut paths_found: Vec<f32> = Vec::new();
 
-
     serde_wasm_bindgen::to_value(&paths_found).unwrap()
-}
-
-#[wasm_bindgen]
-pub fn array_add(arr: JsValue) -> JsValue {
-    let mut arr_in: Vec<Vec<f32>> = serde_wasm_bindgen::from_value(arr).unwrap();
-    for row in arr_in.iter_mut() {
-        for cell in row.iter_mut() {
-            *cell += 52f32;
-        }
-    }
-
-    serde_wasm_bindgen::to_value(&arr_in).unwrap()
 }
