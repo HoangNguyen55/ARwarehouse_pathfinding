@@ -44,17 +44,14 @@ pub fn set_internal_coordinates(
     let mut coordinates: Vec<Vec<f32>> = serde_wasm_bindgen::from_value(coords).unwrap();
 
     // normalize all the values so that a single rack take up 1 cell in the internal representation of a 2d map
-    let max_row = (warehouse_width / rack_width).floor();
-    let max_col = (warehouse_depth / rack_depth).floor();
+    let max_row = warehouse_width / rack_width;
+    let max_col = warehouse_depth / rack_depth;
+    let mut warehouse = Array2D::filled_with(false, max_row.round() as usize, max_col.round() as usize);
     for coordinate in coordinates.iter_mut() {
         // shifts all the coordinate so that top left is 0, 0
-        coordinate[0] = (coordinate[0] / rack_width).ceil() + (max_row / 2f32).round();
-        coordinate[1] = (coordinate[1] / rack_depth).ceil() + max_col;
-    }
-
-    let mut warehouse = Array2D::filled_with(false, max_row as usize, max_col as usize);
-    for coordinate in coordinates.iter() {
-        warehouse[(coordinate[0] as usize, coordinate[1] as usize)] = true;
+        let x: usize = ((coordinate[0] / rack_width) + (max_row / 2f32)).floor() as usize;
+        let y: usize = ((coordinate[1] / rack_depth) + max_col).floor() as usize;
+        warehouse[(x, y)] = true;
     }
 
     unsafe {
