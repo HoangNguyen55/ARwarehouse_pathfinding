@@ -3,6 +3,8 @@ use serde_wasm_bindgen;
 use wasm_bindgen::prelude::*;
 use std::collections::{BinaryHeap, HashMap};
 use std::cmp::Reverse;
+use std::marker::Copy;
+use std::convert::{From, Into};
 
 type Location = (usize, usize);
 
@@ -32,39 +34,31 @@ fn get_warehouse() -> &'static Array2D<bool> {
  * coords: an array of x and y values of the ard file \[(x1,y1), (x2, y2)]
 */
 #[wasm_bindgen]
-pub fn set_internal_coordinates(
+pub unsafe fn set_internal_coordinates(
     warehouse_width: f32,
     warehouse_depth: f32,
     rack_width: f32,
     rack_depth: f32,
     coords: JsValue,
 ) {
-    unsafe {
-        WAREHOUSE_WIDTH = warehouse_width;
-        WAREHOUSE_DEPTH = warehouse_depth;
-        RACK_DEPTH = rack_depth;
-        RACK_WIDTH = rack_width;
-    }
+    WAREHOUSE_WIDTH = warehouse_width;
+    WAREHOUSE_DEPTH = warehouse_depth;
+    RACK_DEPTH = rack_depth;
+    RACK_WIDTH = rack_width;
+    MAX_ROW = (warehouse_width / rack_width).round() as i32;
+    MAX_COL = (warehouse_depth / rack_depth).round() as i32;
 
     let mut coordinates: Vec<Vec<f32>> = serde_wasm_bindgen::from_value(coords).unwrap();
 
     // normalize all the values so that a single rack take up 1 cell in the internal representation of a 2d map
-    let max_row = warehouse_width / rack_width;
-    let max_col = warehouse_depth / rack_depth;
-    let mut warehouse =
-        Array2D::filled_with(false, max_row.round() as usize, max_col.round() as usize);
+    let mut warehouse = Array2D::filled_with(false, MAX_ROW as usize, MAX_COL as usize);
     for coordinate in coordinates.iter_mut() {
-        // shifts all the coordinate so that top left is 0, 0
-        let x: usize = ((coordinate[0] / rack_width) + (max_row / 2f32)).floor() as usize;
-        let y: usize = ((coordinate[1] / rack_depth) + max_col).floor() as usize;
-        warehouse[(x, y)] = true;
+        // shifts all the coordinate so that 0, 0 is middle bottom
+        let coord: Location = get_grid_coordinate(coordinate.to_owned());
+        warehouse[coord] = true;
     }
 
-    unsafe {
-        MAX_ROW = (warehouse_width / rack_width).round() as i32;
-        MAX_COL = (warehouse_depth / rack_depth).round() as i32;
-        WAREHOUSE = Some(warehouse);
-    }
+    WAREHOUSE = Some(warehouse);
 }
 
 fn get_distance(current_location: &Location, end_location: &Location) -> usize {
@@ -107,16 +101,25 @@ fn get_walkable_surroudings(current: &Location) -> Vec<Location> {
     return temp;
 }
 
+unsafe fn get_grid_coordinate<T>(input_coordinates: Vec<T>) -> Location
+where T:  From<f32>
+        + Into<f32>
+        + Copy
+{
+    let x_converted: usize = ((input_coordinates[0].into() / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as usize;
+    let y_converted: usize = ((input_coordinates[1].into() / RACK_WIDTH) + MAX_COL as f32).floor() as usize;
+
+    return (x_converted, y_converted)
+}
+
 /**
  * A* algorithm for calculating the pathings of two points
  */
-#[wasm_bindgen]
+//#[wasm_bindgen]
 pub unsafe fn calculate_path(start_in: Vec<f32>, end_in: Vec<f32>) -> JsValue {
     // calculate the coordinate of the start and end location
-    let start_location: Location = (((start_in[0] / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as usize,
-                 ((start_in[1] / RACK_WIDTH) + MAX_COL as f32).floor() as usize);
-    let end_location: Location = (((end_in[0] / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as usize,
-                 ((end_in[1] / RACK_WIDTH) + MAX_COL as f32).floor() as usize);
+    let start_location: Location = get_grid_coordinate(start_in);
+    let end_location: Location = get_grid_coordinate(end_in);
 
     let mut queue: BinaryHeap<Reverse<Location>> = BinaryHeap::new();
     queue.push(Reverse(start_location));
