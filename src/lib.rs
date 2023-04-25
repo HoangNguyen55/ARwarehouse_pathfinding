@@ -1,52 +1,17 @@
 use array2d::Array2D;
 use serde_wasm_bindgen;
-use wasm_bindgen::prelude::*;
-use std::collections::{BinaryHeap, HashSet};
-use std::cmp::{Reverse, Ordering};
-use std::marker::Copy;
+use std::cmp::Ordering;
+use std::collections::{BinaryHeap, HashMap};
 use std::convert::{From, Into};
+use std::marker::Copy;
+use wasm_bindgen::prelude::*;
 
-#[derive(Eq)]
-struct Location {
-    x: usize,
-    y: usize,
-    g_cost: usize,
-    h_cost: usize 
-}
-
-impl Ord for Location {
-    fn cmp(&self, other: &Self) -> Ordering {
-        self.get_f_cost().cmp(&other.get_f_cost())
-    }
-}
-
-impl PartialOrd for Location {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl PartialEq for Location {
-    fn eq(&self, other: &Self) -> bool {
-        self.get_f_cost() == other.get_f_cost()
-    }
-}
-
-impl Location {
-    pub fn new(x: usize, y: usize) -> Location {
-        return Location {
-            x,
-            y,
-            g_cost: 0usize,
-            h_cost: 0usize 
-        }
-    }
-    pub fn get_f_cost(&self) -> usize {
-        return self.h_cost + self.g_cost;
-    }
-    pub fn get_coordinate(&self) -> (usize, usize) {
-        return (self.x.clone(), self.y.clone());
-    }
+#[wasm_bindgen]
+extern "C" {
+    // Use `js_namespace` here to bind `console.log(..)` instead of just
+    // `log(..)`
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(s: String);
 }
 
 static mut WAREHOUSE_WIDTH: f32 = 0f32;
@@ -65,6 +30,147 @@ fn get_warehouse() -> &'static Array2D<bool> {
             std::mem::transmute(WAREHOUSE.as_mut().unwrap())
         }
     }
+}
+
+/**
+ * returns coordinates in AR, in meters
+ */
+unsafe fn get_real_coordinate(location: &Node) -> Vec<f32> {
+    let x: f32 = ((location.x as f32) - (MAX_ROW as f32 / 2f32)) * RACK_WIDTH;
+    let y: f32 = ((location.y as f32) - MAX_COL as f32) * RACK_DEPTH;
+
+    return vec![x, y];
+}
+
+unsafe fn get_grid_coordinate<T>(input_coordinates: Vec<T>) -> Node
+where
+    T: From<f32> + Into<f32> + Copy,
+{
+    let x = ((input_coordinates[0].into() / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as i32;
+    let y = ((input_coordinates[1].into() / RACK_WIDTH) + MAX_COL as f32).floor() as i32;
+
+    return Node{x, y};
+}
+
+
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+pub struct Node {
+    x: i32,
+    y: i32,
+}
+
+impl Node {
+    fn get_distance(&self, to_location: &Node) -> i32 {
+        let x = (self.x - to_location.x).abs();
+        let y = (self.y - to_location.y).abs();
+    
+        if x > y {
+            return 14 * y + 10 * (x - y);
+        }
+        return 14 * x + 10 * (y - x);
+    }
+
+
+    unsafe fn get_neighbors(&self) -> Vec<Node> {
+        let mut temp: Vec<Node> = vec![];
+
+        for x in -1..=1 {
+            for y in -1..=1 {
+                if x == 0 && y == 0 {
+                    continue;
+                }
+
+                let new_x = self.x + x;
+                let new_y = self.y + y;
+
+                if new_x < 0 || new_x >= MAX_ROW || new_y < 0 || new_y >= MAX_COL {
+                    continue;
+                }
+
+                temp.push(Node{x: new_x, y: new_y});
+            }
+        }
+
+        temp
+    }
+
+    fn get_coordinate(&self) -> (usize, usize) {
+        return (self.x as usize, self.y as usize)
+    }
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+struct State {
+    node: Node,
+    f_score: i32,
+}
+
+impl Ord for State {
+    fn cmp(&self, other: &Self) -> Ordering {
+        other.f_score.cmp(&self.f_score)
+    }
+}
+
+impl PartialOrd for State {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+/**
+ * A* algorithm for calculating the pathings of two points
+ */
+//#[wasm_bindgen]
+pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
+    let start: Node = get_grid_coordinate(start_lo);
+    let goal: Node = get_grid_coordinate(goal_lo);
+
+    // log(format!("start: x:{} y:{}, goal: x: {} y:{}", start.x, start.y, goal.x, goal.y));
+    let mut open_set = BinaryHeap::new();
+    let mut came_from = HashMap::new();
+    let mut g_score = HashMap::new();
+    let mut f_score = HashMap::new();
+    let grid = get_warehouse();
+
+    g_score.insert(start, 0);
+    f_score.insert(start, start.get_distance(&goal));
+
+    open_set.push(State { node: start, f_score: start.get_distance(&goal) });
+
+    while let Some(current_state) = open_set.pop() {
+        let current = current_state.node;
+
+        if current == goal {
+            let mut path: Vec<Vec<f32>> = Vec::new();
+            let mut current_node = current;
+
+            while let Some(&node) = came_from.get(&current_node) {
+                path.push(get_real_coordinate(&current_node));
+                current_node = node;
+            }
+
+            path.push(get_real_coordinate(&start));
+            // path.reverse();
+            return serde_wasm_bindgen::to_value(&path).unwrap();
+        }
+
+        for neighbor in current.get_neighbors() {
+            if grid[neighbor.get_coordinate()] {
+                continue;
+            }
+
+            let tentative_g_score = g_score.get(&current).unwrap() + current.get_distance(&neighbor);
+
+            if !g_score.contains_key(&neighbor) || tentative_g_score < *g_score.get(&neighbor).unwrap() {
+                came_from.insert(neighbor, current);
+                g_score.insert(neighbor, tentative_g_score);
+                f_score.insert(neighbor, tentative_g_score + neighbor.get_distance(&goal));
+                open_set.push(State { node: neighbor, f_score: tentative_g_score + neighbor.get_distance(&goal) });
+            }
+        }
+    }
+
+    return serde_wasm_bindgen::to_value("No Path Founds").unwrap();
 }
 
 /**
@@ -99,94 +205,13 @@ pub unsafe fn set_internal_coordinates(
         warehouse[coord] = true;
     }
 
+    // log(format!("row: {MAX_ROW}, col:{MAX_COL}"));
+
     WAREHOUSE = Some(warehouse);
 }
 
-fn get_distance(current_location: &Location, end_location: &Location) -> usize {
-    let diffx = (current_location.x as f32 - end_location.x as f32).powi(2);
-    let diffy = (current_location.y as f32 - end_location.y as f32).powi(2);
-    return  (diffx + diffy).sqrt().round() as usize;
-}
-
-fn get_walkable_surroudings(current: &Location) -> Vec<Location> {
-    const EIGHT_DIRECTION: [(i32, i32); 8] = [
-        (0, 1),
-        (0, -1),
-        (1, 0),
-        (1, 1),
-        (1, -1),
-        (-1, 0),
-        (-1, 1),
-        (-1, -1),
-    ];
-    let warehouse = get_warehouse();
-
-    let mut temp: Vec<Location> = vec![];
-    
-    for dir in &EIGHT_DIRECTION {
-        let x = current.x as i32 + dir.0;
-        let y = current.y as i32 + dir.1;
-        unsafe {
-            // check if the coordinate is in bounds
-            if x > 0 && y > 0 && x < MAX_ROW && y < MAX_COL {
-                let new_dir = Location::new(x as usize, y as usize);
-
-                // check if the location is free to walk on 
-                if !warehouse[new_dir.get_coordinate()] {
-                    temp.push(new_dir);
-                }
-            } 
-        }
-    }
-
-    return temp;
-}
-
-unsafe fn get_grid_coordinate<T>(input_coordinates: Vec<T>) -> Location
-where T:  From<f32>
-        + Into<f32>
-        + Copy
-{
-    let x: usize = ((input_coordinates[0].into() / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as usize;
-    let y: usize = ((input_coordinates[1].into() / RACK_WIDTH) + MAX_COL as f32).floor() as usize;
-
-    return Location::new(x, y);
-}
-
-/**
- * A* algorithm for calculating the pathings of two points
- */
 #[wasm_bindgen]
-pub unsafe fn calculate_path(start_in: Vec<f32>, end_in: Vec<f32>) -> JsValue {
-    // calculate the coordinate of the start and end location
-    let start_location: Location = get_grid_coordinate(start_in);
-    let end_location: Location = get_grid_coordinate(end_in);
-
-    // create a priority queue but the queue is currently a max-heap
-    let mut queue: BinaryHeap<Reverse<Location>> = BinaryHeap::new();
-    // need to use Reverse to have a min-heap
-    queue.push(Reverse(start_location));
-
-    let mut visited: HashSet<Location> = HashSet::new(); 
-
-    while !queue.is_empty() {
-        let Reverse(current) = queue.pop().unwrap(); 
-        if current == end_location {
-            break;
-        }
-
-        for next_coordinate in get_walkable_surroudings(&current) {
-
-        }
-
-    }
-
-    //temp return so rust_analyzer dont error out
-    return serde_wasm_bindgen::to_value(&visited).unwrap();
-}
-
-#[wasm_bindgen]
-pub fn testing() -> JsValue {
+pub unsafe fn testing() -> JsValue {
     let warehouse: &Array2D<bool> = get_warehouse();
     let mut out: Vec<Vec<i32>> = vec![];
     for i in warehouse.columns_iter() {
@@ -199,4 +224,3 @@ pub fn testing() -> JsValue {
 
     serde_wasm_bindgen::to_value(&out).unwrap()
 }
-
