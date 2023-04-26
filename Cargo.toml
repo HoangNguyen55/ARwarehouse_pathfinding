@@ -11,6 +11,9 @@ description = "Pathfinding algorithm for the AR warehouse project"
 [lib]
 crate-type = ["cdylib"]
 
+[profile.release]
+lto = true
+
 [dependencies]
 array2d = "0.3.0"
 serde = { version = "1.0.159", features = ["derive"] }
