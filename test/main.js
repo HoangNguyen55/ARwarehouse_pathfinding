@@ -43,13 +43,13 @@ async function parseARD(path) {
     return array
 }
 
-function find_path(pick) {
+function find_path(start, end) {
     grid = testing();
-    let path_found = calculate_path([0, 0], [pick[0], pick[1]]);
+    let path_found = calculate_path(start, end);
     path_found.forEach((i) => {
         let x = Math.floor((i[1] / arr['rackWidth']) + (max_row / 2));
         let y = Math.floor((i[0] / arr['rackDepth']) + max_col);
-        grid[x][y] = 2;
+        grid.at(x)[y] = 2;
     })
 
     for (let i = 0; i < grid.length; i++) {
@@ -77,11 +77,10 @@ canvas.width = grid[0].length * 10;
 canvas.height = grid.length * 10;
 const ctx = canvas.getContext("2d");
 let t = -3001;
-
 arr['pickings'].forEach((pick) => {
     t += 3000;
     setTimeout(() => { 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        find_path(pick)
+        find_path([0,0], pick)
     }, t);
 })
