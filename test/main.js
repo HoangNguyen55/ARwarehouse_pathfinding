@@ -1,4 +1,4 @@
-import init, { set_internal_coordinates, testing } from './pkg/arwarehouse_pathfinding.js'
+import init, { set_internal_coordinates, calculate_path } from './pkg/arwarehouse_pathfinding.js'
 
 async function parseARD(path) {
     //convert feet to metre, value of ard are feet.
@@ -39,8 +39,11 @@ async function run() {
     const arr = await parseARD('./fishbone.ard');
 
     set_internal_coordinates(arr['warehouseWidth'], arr['warehouseDepth'], arr['rackWidth'], arr['rackDepth'], arr['locations']);
-    let a = testing();
-    console.log(a);
+    // let grid = testing();
+    let path_found = calculate_path([0, 0], [74 / 3.281, -16 / 3.281]);
+
+    console.log(path_found);
+
 }
 
 run()

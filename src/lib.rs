@@ -120,7 +120,7 @@ impl PartialOrd for State {
 /**
  * A* algorithm for calculating the pathings of two points
  */
-//#[wasm_bindgen]
+#[wasm_bindgen]
 pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
     let start: Node = get_grid_coordinate(start_lo);
     let goal: Node = get_grid_coordinate(goal_lo);
