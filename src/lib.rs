@@ -140,24 +140,30 @@ impl PartialOrd for State {
 pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
     let start: Node = get_grid_coordinate(start_lo);
     let goal: Node = get_grid_coordinate(goal_lo);
+    let grid: &Array2D<bool> = get_warehouse();
 
-    let mut open_set = BinaryHeap::new();
-    let mut came_from = HashMap::new();
-    let mut g_score = HashMap::new();
-    let mut f_score = HashMap::new();
-    let grid = get_warehouse();
+    // priority queue, O(logn) finding the smallest f_cost
+    let mut open_set: BinaryHeap<State> = BinaryHeap::new();
+
+    // keep track of traversed path
+    let mut came_from: HashMap<Node, Node> = HashMap::new();
+
+    // keep track of g_score, which we can also 
+    // use to see which path have been visited
+    let mut g_score: HashMap<Node, i32> = HashMap::new();
 
     g_score.insert(start, 0);
-    f_score.insert(start, start.get_distance(&goal));
 
     open_set.push(State {
         node: start,
         f_score: start.get_distance(&goal),
     });
 
+    // loop until open_set is empty
     while let Some(current_state) = open_set.pop() {
         let current = current_state.node;
 
+        // if we are at destination, retrace our steps in the came_from map
         if current == goal {
             let mut path: Vec<Vec<f32>> = Vec::new();
             let mut current_node = current;
@@ -172,6 +178,7 @@ pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
         }
 
         for neighbor in current.get_neighbors() {
+            // if neighbor is a wall skip current iteration
             if grid[neighbor.get_coordinate()] {
                 continue;
             }
@@ -184,7 +191,6 @@ pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
             {
                 came_from.insert(neighbor, current);
                 g_score.insert(neighbor, tentative_g_score);
-                f_score.insert(neighbor, tentative_g_score + neighbor.get_distance(&goal));
                 open_set.push(State {
                     node: neighbor,
                     f_score: tentative_g_score + neighbor.get_distance(&goal),
