@@ -14,8 +14,8 @@ static mut RACK_DEPTH: f32 = 0f32;
 static mut MAX_ROW: i32 = 0i32;
 static mut MAX_COL: i32 = 0i32;
 // a 2d map of the warehouse
-static mut WAREHOUSE: Option<Array2D<bool>> = None;
-fn get_warehouse() -> &'static Array2D<bool> {
+static mut WAREHOUSE: Option<Array2D<i32>> = None;
+fn get_warehouse() -> &'static Array2D<i32> {
     unsafe {
         if WAREHOUSE.is_none() {
             panic!("Run set_internal_coordinates() first");
@@ -45,16 +45,8 @@ where
 {
     let mut x = ((input_coordinates[0].into() / RACK_WIDTH) + (MAX_ROW as f32 / 2f32)).floor() as i32;
     let mut y = ((input_coordinates[1].into() / RACK_WIDTH) + MAX_COL as f32).floor() as i32;
-    if x >= MAX_ROW {
-        x = MAX_ROW - 1
-    } else if x <= 0 {
-        x = 0;
-    }
-    if y >= MAX_COL {
-        y = MAX_COL - 1
-    } else if y <= 0 {
-        y = 0;
-    }
+    x = x.clamp(0, MAX_ROW -1);
+    y = y.clamp(0, MAX_COL -1);
 
     return Node { x, y };
 }
@@ -140,7 +132,7 @@ impl PartialOrd for State {
 pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
     let start: Node = get_grid_coordinate(start_lo);
     let goal: Node = get_grid_coordinate(goal_lo);
-    let grid: &Array2D<bool> = get_warehouse();
+    let grid: &Array2D<i32> = get_warehouse();
 
     // priority queue, O(logn) finding the smallest f_cost
     let mut open_set: BinaryHeap<State> = BinaryHeap::new();
@@ -179,12 +171,13 @@ pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
 
         for neighbor in current.get_neighbors() {
             // if neighbor is a wall skip current iteration
-            if grid[neighbor.get_coordinate()] {
+            let cell_cost = grid[neighbor.get_coordinate()];
+            if cell_cost == -1 {
                 continue;
             }
 
             let tentative_g_score =
-                g_score.get(&current).unwrap() + current.get_distance(&neighbor);
+                g_score.get(&current).unwrap() + current.get_distance(&neighbor) + cell_cost;
 
             if !g_score.contains_key(&neighbor)
                 || tentative_g_score < *g_score.get(&neighbor).unwrap()
@@ -227,10 +220,26 @@ pub unsafe fn set_internal_coordinates(
 
     let mut coordinates: Vec<Vec<f32>> = serde_wasm_bindgen::from_value(coords).unwrap();
 
-    let mut warehouse = Array2D::filled_with(false, MAX_ROW as usize, MAX_COL as usize);
+    let mut warehouse = Array2D::filled_with(0, MAX_ROW as usize, MAX_COL as usize);
+    let mut warehouse_walls: Vec<Node> = Vec::new();
+    
+    // fill in the walls (grid where you cant go)
     for coordinate in coordinates.iter_mut() {
-        let coord: (usize, usize) = get_grid_coordinate(coordinate.to_owned()).get_coordinate();
-        warehouse[coord] = true;
+        let coord: Node = get_grid_coordinate(coordinate.to_owned());
+        warehouse_walls.push(coord.clone());
+        warehouse[coord.get_coordinate()] = -1;
+    }
+    
+    // fill in penelties, to smooth out the pathfinding
+    // so that it wont stick too close to the wall
+    for coordinate in &warehouse_walls {
+        for neighbor in coordinate.get_neighbors() {
+            if warehouse_walls.contains(&neighbor) {
+                continue;
+            }
+
+            warehouse[neighbor.get_coordinate()] = 10
+        }
     }
 
     WAREHOUSE = Some(warehouse);
@@ -238,12 +247,16 @@ pub unsafe fn set_internal_coordinates(
 
 #[wasm_bindgen]
 pub unsafe fn testing() -> JsValue {
-    let warehouse: &Array2D<bool> = get_warehouse();
+    let warehouse: &Array2D<i32> = get_warehouse();
     let mut out: Vec<Vec<i32>> = vec![];
     for i in warehouse.columns_iter() {
         let mut temp: Vec<i32> = vec![];
         for ele in i {
-            temp.push(if ele.to_owned() { 1 } else { 0 });
+            if ele.to_owned() == -1 {
+                temp.push(1);
+            } else {
+                temp.push(0);
+            }
         }
         out.push(temp);
     }
