@@ -127,11 +127,13 @@ impl PartialOrd for State {
 
 /**
  A* algorithm for calculating the pathings of two points
+ Params: `start_location`: input have to be in meters
+ Params: `goal_location`: input have to be in meters
  */
 #[wasm_bindgen]
-pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
-    let start: Node = get_grid_coordinate(start_lo);
-    let goal: Node = get_grid_coordinate(goal_lo);
+pub unsafe fn calculate_path(start_location: Vec<f32>, goal_location: Vec<f32>) -> JsValue {
+    let start: Node = get_grid_coordinate(start_location);
+    let goal: Node = get_grid_coordinate(goal_location);
     let grid: &Array2D<i32> = get_warehouse();
 
     // priority queue, O(logn) finding the smallest f_cost
@@ -197,11 +199,11 @@ pub unsafe fn calculate_path(start_lo: Vec<f32>, goal_lo: Vec<f32>) -> JsValue {
 
 /**
  Calculate all the needed value and cache them
- Params: warehouse_width: width of the warehouse in meters
- Params: warehouse_depth: depth of the warehouse in meters
- Params: rack_width: width of the rack in meters
- Params: rack_depth: depth of the rack in meters
- Params: coords: an array of x and y values of the ard file \[(x1,y1), (x2, y2)]
+ Params: `warehouse_width`: width of the warehouse in meters
+ Params: `warehouse_depth`: depth of the warehouse in meters
+ Params: `rack_width`: width of the rack in meters
+ Params: `rack_depth`: depth of the rack in meters
+ Params: `coords`: an array of x and y values of the ard file `[(x1,y1), (x2, y2)]`
 */
 #[wasm_bindgen]
 pub unsafe fn set_internal_coordinates(
@@ -230,6 +232,7 @@ pub unsafe fn set_internal_coordinates(
         warehouse[coord.get_coordinate()] = -1;
     }
     
+    // TODO only add penelties if it isn't a diagonal
     // fill in penelties, to smooth out the pathfinding
     // so that it wont stick too close to the wall
     for coordinate in &warehouse_walls {
